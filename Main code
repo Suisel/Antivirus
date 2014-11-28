@@ -4,13 +4,43 @@
 #include "stdafx.h"
 #include <iostream>
 using namespace std;
+#include <string>
 #include <vector>
 #include <stdio.h>
- #include <stdlib.h>
+#include <stdlib.h>
+#include <fstream>
 
+using namespace std;
 
 
 // used to find the substring in some string
+
+void addName(string s){
+	ofstream f;
+	f.open("nameBase.txt", ios::app);
+	f << s + " ";
+	f.close();
+}
+
+string names[100];
+int amount;
+void loadSignatures(){
+	ifstream f;
+	f.open("nameBase.txt", ios::in);
+	string t;
+	getline(f, t);
+	int current = 0;
+	for (int i = 0; i < t.length(); i++){
+		if (t[i] != ' '){
+			names[current] += t[i];
+		}
+		else {
+			current++;
+		}
+	}
+	amount = current;
+}
+
 vector<int> calc_z(const char * s){
 	vector<int> z;
 	int len = strlen(s);
@@ -37,11 +67,16 @@ vector<int> calc_z(const char * s){
 	return z;
 }
 
-#include<string>;	
+
 int _tmain(int argc, char *argv[])
 {
-
-	//if 'T' tapped then write info about our team
+	//addName("CDE");
+	loadSignatures();
+//	string x = "asdasd";
+	for (int i = 0; i < amount; i++){
+		cout << names[i] + " ";
+	}
+/*	//if 'T' tapped then write info about our team
 	if (*argv[1] == 'T'){
 		cout << "team name";
 	}
