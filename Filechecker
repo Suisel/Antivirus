@@ -1,0 +1,65 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+
+public class FileChecker {
+	InputStream file;
+	private int size; 
+	private int[] data;
+	private String dataString = "";
+	private boolean found(String string){
+		if (dataString.contains(string)){
+			return true;
+		}
+		return false;
+	}
+	
+	private void dataToString(){
+	
+		for (int i = 0; i < size; i++){
+			for (int j = 0; j < 8; j++){
+				dataString += (data[i] % 2);
+				data[i] /= 2;
+			}
+		}
+	}
+	
+	private void check(){
+		for (int i = 0; i < base.dataSize; i++){
+			if (found(base.data[i])){
+				System.out.println("Virus alarm!");
+				return;
+			}
+		}
+		System.out.println("No firuses in this file");
+	}
+	
+	
+	private Database base;
+	FileChecker(String fileName, Database base){
+		try {
+			file = new FileInputStream(fileName);
+		} catch (FileNotFoundException e) {
+			System.out.println("Error, file not found!!");
+			return;
+		} 
+		this.base = base;
+		try {
+			size = file.available();
+		} catch (IOException e) {
+		}
+		
+		data = new int[size];
+		for (int i = 0; i < size; i++){
+			try {
+				data[i] = file.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		dataToString();
+		check();
+	}
+}
