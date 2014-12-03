@@ -11,3 +11,13 @@ To download and run the program:
 5.	Run the program using
 
 ========
+
+Developers
+
+Zakuanova Margarita
+
+Pichushkin Konstantin
+
+Lavelina Elizaveta
+
+Maslovskaya Maria
