@@ -12,7 +12,7 @@ To download and run the program:
 
 ========
 
-Developers
+Developers:
 
 Zakuanova Margarita
 
