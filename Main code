@@ -1,115 +1,59 @@
-// Антивирус.cpp : Defines the entry point for the console application.
-//
-
-#include "stdafx.h"
-#include <iostream>
-using namespace std;
-#include <string>
-#include <vector>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fstream>
-
-using namespace std;
+import java.util.Scanner;
 
 
-// used to find the substring in some string
-
-void addName(string s){
-	ofstream f;
-	f.open("nameBase.txt", ios::app);
-	f << s + " ";
-	f.close();
-}
-
-string names[100];
-int amount;
-void loadSignatures(){
-	ifstream f;
-	f.open("nameBase.txt", ios::in);
-	string t;
-	getline(f, t);
-	int current = 0;
-	for (int i = 0; i < t.length(); i++){
-		if (t[i] != ' '){
-			names[current] += t[i];
-		}
-		else {
-			current++;
-		}
+public class BorsheVirus {
+	
+	
+	
+	private static void printHelloPage(){
+		System.out.println("This it Borsh Anti-virus");
+		System.out.println("type 'exit' to exit the program");
+		System.out.println("type 'add signature' to add a signature");
+		System.out.println("type 'view developers' to see developers list");
+		System.out.println("type 'check file' to check a file");
 	}
-	amount = current;
-}
-
-vector<int> calc_z(const char * s){
-	vector<int> z;
-	int len = strlen(s);
-	z.resize(len);
-	z[0] = len;
-	int l = 0, r = 0;
-	int j;
-	for (int i = 1; i < len; i++)
-	if (i > r){
-		for (j = 0; ((j + i) < len) && (s[i + j] == s[j]); j++);
-		z[i] = j;
-		l = i;
-		r = i + j - 1;
+	private static void printDevelopers(){
+		System.out.println("Leader - Rita");
+		System.out.println("bla bla bla");
+		System.out.println("Press any key to continue");
 	}
-	else
-	if (z[i - l] < r - i + 1)
-		z[i] = z[i - l];
-	else{
-		for (j = 1; (s[r + j] == s[r - i + j]) && ((j + r) < len); j++);
-		z[i] = r - i + j;
-		l = i;
-		r = r + j - 1;
+	static Scanner scan = new Scanner(System.in);
+	private static String readStringIn(){
+		return scan.nextLine();
 	}
-	return z;
-}
-
-
-int _tmain(int argc, char *argv[])
-{
-	//addName("CDE");
-	loadSignatures();
-//	string x = "asdasd";
-	for (int i = 0; i < amount; i++){
-		cout << names[i] + " ";
-	}
-/*	//if 'T' tapped then write info about our team
-	if (*argv[1] == 'T'){
-		cout << "team name";
-	}
-	//if 'H' tapped then write help 
-	if (*argv[1] == 'H'){
-		cout << "some help";
-	}
-	// if 'C' tapped then check a stringerino
-	if (*argv[1] == 'C'){
-		int subStringSize = 3;
-		char s[15] = "abc aasabsabcs";
-		char *p = s;
-		vector<int> ans;
-		ans = calc_z(p);
-		bool found = false;
-		for (int i = 1; i < 14; i++){
-			if (ans[i] == subStringSize){
-				found = true;
-				break;
+	private static FileChecker file;
+	static Database base;
+	
+	public static void main(String args[]){
+		base = new Database("data.txt");;
+		boolean stop = false;
+		String string;
+		while (!stop){
+			printHelloPage();
+			string = readStringIn();
+			if (string.equals("exit")){
+				stop = true;
+			}
+			
+			if (string.equals("view developers")){
+				printDevelopers();
+				readStringIn();
+			}
+			
+			if (string.equals("add signature")){
+				System.out.println("Enter signature then press enter");
+				string = readStringIn();
+				base.add(string);
+				System.out.println(string);
+				System.out.println("Added!");
+			}
+			
+			if (string.equals("check file")){
+				System.out.println("Enter file name");
+				string = readStringIn();
+				file = new FileChecker(string, base);
 			}
 		}
-
-		if (found){
-			cout << "Substring_Found";
-		}
-		else {
-			cout << "Substring_Not_Found";
-		}
+		base.close();
 	}
-
-	//cout<<argc;*/
-	system("pause");
-	return 0;
-	//ds  fsdf
 }
-
