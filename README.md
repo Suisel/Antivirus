@@ -1,7 +1,7 @@
 Antivirus
 =========
-Attention! To use this program you need Java-machine installed on your computer
--------
+**Attention! To use this program you need Java-machine installed on your computer**
+
 To download and run the program:
 
 1.	Download ZIP-file
