@@ -4,30 +4,38 @@ import java.util.Scanner;
 public class BorsheVirus {
 	
 	
-	
+	/**
+	 * prints default code
+	 */
 	private static void printHelloPage(){
 		System.out.println("This it Borsh Anti-virus");
 		System.out.println("type 'exit' to exit the program");
 		System.out.println("type 'add signature' to add a signature");
 		System.out.println("type 'view developers' to see developers list");
 		System.out.println("type 'check file' to check a file");
+		System.out.println("type 'add directory' to add a new directory to Hash base");
+		System.out.println("type 'check directories' to check directories");
 	}
+	/**
+	 * used to print developer's names
+	 */
 	private static void printDevelopers(){
 		System.out.println("Leader - Rita");
-		System.out.println("bla bla bla");
 		System.out.println("Press any key to continue");
 	}
+	
 	static Scanner scan = new Scanner(System.in);
 	private static String readStringIn(){
 		return scan.nextLine();
 	}
-	private static FileChecker file;
-	static Database base;
 	
+	static FileChecker file;
+	static SignatureData base;
 	public static void main(String args[]){
-		base = new Database("data.txt");;
+		base = new SignatureData("SignatureData.txt");;
 		boolean stop = false;
 		String string;
+		FileData fileData = new FileData();
 		while (!stop){
 			printHelloPage();
 			string = readStringIn();
@@ -44,7 +52,6 @@ public class BorsheVirus {
 				System.out.println("Enter signature then press enter");
 				string = readStringIn();
 				base.add(string);
-				System.out.println(string);
 				System.out.println("Added!");
 			}
 			
@@ -53,7 +60,22 @@ public class BorsheVirus {
 				string = readStringIn();
 				file = new FileChecker(string, base);
 			}
+			
+			if (string.equals("add directory")){
+				System.out.println("Enter directory path (c:\\Windows as example)");
+				string = readStringIn();
+				fileData.addToFileData(string);
+			}
+			
+			if (string.equals("check directories")){
+				System.out.println("Checking files...");
+				fileData.check();
+			}
+			
+			
+			
 		}
 		base.close();
+		fileData.close();
 	}
 }
