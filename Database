@@ -3,27 +3,36 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
-public class Database {
+/**
+ * used to work with signature data
+ */
+public class SignatureData {
 	private File file;
 	Scanner input;
 	String[] data;
 	public int dataSize;
-	
+	/**
+	 * loads signatures
+	 */
 	private void loadInfo(){
 		data = new String[100];
 		try {
 			input = new Scanner(file);
 		} catch (FileNotFoundException e) {
 			System.out.println("Error, file not foud!");
+			return;
 		}
+		System.out.println("Added!");
 		dataSize = 0;
 		while (input.hasNextLine()){
 			data[dataSize] = input.nextLine();
 			dataSize++;
 		}
 	}
-	
+	/**
+	 * used to save all information
+	 * rewrites signatureData.txt
+	 */
 	public void close(){
 		PrintWriter writer = null;
 		try {
@@ -36,18 +45,22 @@ public class Database {
 		}
 		writer.close();
 	}
-	
+	/**
+	 * used to add a new signature
+	 * @param newName - String signature
+	 */
 	public void add(String newName){
 		data[dataSize] = newName;
 		dataSize++;
 	}
-	
-	Database(String fileName){
+	/**
+	 * load's signature data
+	 * @param fileName
+	 */
+	SignatureData(String fileName){
 		file = new File(fileName);
 		loadInfo();
 	}
-	
-	
 	
 	
 }
