@@ -8,7 +8,7 @@ To download and run the program:
 2.	Unpack it
 3.	Open Command Prompt window
 4.	Use command cd to navigate to the folder with the unpacked file
-5.	Run the program using
+5.	Run the program using java -classpath . Borshevirus
 
 ========
 
