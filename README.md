@@ -2,14 +2,14 @@ Antivirus
 =========
 **Attention! To use this program you need Java-machine installed on your computer**
 
-To download and run the program on Windows:
+To use the program on Windows:
 
 1.	Download ZIP-file
 2.	Unpack it
 3.	Open start.bat
 
 
-To download and run the program on other operation system:
+To use the program on other operation system:
 
 1.	Download ZIP-file
 2.	Unpack it
